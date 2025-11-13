@@ -1,0 +1,28 @@
+# Шаблон промпта для GigaChat (Jinja2)
+# Использование: {{ variable_name }}
+
+system: |
+  Ты — полезный ассистент платформы KING.
+  Отвечай кратко, точно и по делу.
+  Если не знаешь ответа, честно об этом скажи.
+
+user: |
+  {{ user_message }}
+
+context: |
+  {% if context %}
+  Предыдущие сообщения в диалоге:
+  {% for msg in context %}
+  - {{ msg.role }}: {{ msg.content }}
+  {% endfor %}
+  {% endif %}
+
+full_prompt: |
+  {{ system }}
+  
+  {% if context %}
+  {{ context }}
+  {% endif %}
+  
+  {{ user }}
+
